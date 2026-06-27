@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    description: "Raw data loaded from ingestion pipeline"
+    tables:
+      - name: raw_candidate_apartments
+        description: "Manually curated apartment candidates loaded from CSV"
+      - name: raw_building_permits
+        description: "Seattle building permits from Socrata API (JSONB)"
+      - name: raw_rental_registration
+        description: "Seattle rental property registration from Socrata API (JSONB)"
+      - name: raw_code_violations
+        description: "Seattle code complaints and violations from Socrata API (JSONB)"

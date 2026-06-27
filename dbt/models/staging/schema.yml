@@ -1,0 +1,83 @@
+version: 2
+
+models:
+  - name: stg_building_permits
+    description: "Cleaned building permits extracted from JSONB raw records"
+    columns:
+      - name: row_id
+        tests:
+          - not_null
+          - unique
+      - name: permit_number
+        tests:
+          - not_null
+      - name: address
+        tests:
+          - not_null
+      - name: status
+        tests:
+          - not_null
+
+  - name: stg_rental_registration
+    description: "Cleaned rental property registrations extracted from JSONB raw records"
+    columns:
+      - name: row_id
+        tests:
+          - not_null
+          - unique
+      - name: registration_id
+        tests:
+          - not_null
+      - name: address
+        tests:
+          - not_null
+      - name: status
+        tests:
+          - not_null
+
+  - name: stg_code_violations
+    description: "Cleaned code complaints and violations extracted from JSONB raw records"
+    columns:
+      - name: row_id
+        tests:
+          - not_null
+          - unique
+      - name: record_number
+        tests:
+          - not_null
+      - name: address
+        description: "Some violation records have null addresses in the source data"
+        tests:
+          - not_null:
+              config:
+                severity: warn
+      - name: status
+        tests:
+          - not_null
+
+  - name: stg_candidate_apartments
+    description: "Cleaned candidate apartments from manually curated CSV"
+    columns:
+      - name: apartment_id
+        tests:
+          - not_null
+          - unique
+      - name: apartment_name
+        tests:
+          - not_null
+      - name: normalized_address
+        tests:
+          - not_null
+      - name: listed_rent
+        tests:
+          - not_null
+      - name: neighborhood
+        tests:
+          - not_null
+      - name: data_privacy_level
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['public_demo', 'portfolio_safe', 'private_local']
+              config:
+                severity: warn

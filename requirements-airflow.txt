@@ -1,0 +1,3 @@
+# Optional future orchestration dependency.
+# Not required for the current Makefile-based pipeline.
+apache-airflow>=2.8.0

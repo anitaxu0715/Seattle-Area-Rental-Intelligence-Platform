@@ -1,0 +1,90 @@
+version: 2
+
+models:
+  - name: mart_apartment_due_diligence
+    description: "Apartment-level due-diligence view with jurisdiction-aware flags, grouped flag counts, hard filters, and candidate status"
+    columns:
+      - name: apartment_id
+        tests:
+          - not_null
+          - unique
+      - name: apartment_name
+        tests:
+          - not_null
+      - name: normalized_address
+        tests:
+          - not_null
+      - name: jurisdiction
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['seattle', 'shoreline', 'other_king_county', 'unknown']
+      - name: public_data_coverage_level
+        tests:
+          - not_null
+      - name: consideration_status
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['eligible', 'rejected', 'benchmark']
+      - name: has_coordinates
+        tests:
+          - not_null
+      - name: rental_registration_match
+        tests:
+          - not_null
+      - name: registration_match_note
+        tests:
+          - not_null
+      - name: meets_hard_filters
+        tests:
+          - not_null
+      - name: flag_partial_public_data_coverage
+        tests:
+          - not_null
+      - name: flag_availability_unclear
+        tests:
+          - not_null
+      - name: flag_parking_unavailable
+        tests:
+          - not_null
+      - name: total_public_record_flags
+        tests:
+          - not_null
+      - name: total_coverage_limitation_flags
+        tests:
+          - not_null
+      - name: total_renter_fit_flags
+        tests:
+          - not_null
+      - name: total_due_diligence_flags
+        tests:
+          - not_null
+
+  - name: mart_nearby_complaint_evidence
+    description: "Individual complaint records within 500m of each candidate apartment, for dashboard evidence display"
+    columns:
+      - name: apartment_id
+        tests:
+          - not_null
+      - name: record_number
+        tests:
+          - not_null
+      - name: estimated_distance_meters
+        tests:
+          - not_null
+
+  - name: mart_nearby_permit_evidence
+    description: "Individual permit records within 500m of each candidate apartment, for dashboard evidence display"
+    columns:
+      - name: apartment_id
+        tests:
+          - not_null
+      - name: permit_number
+        tests:
+          - not_null
+      - name: estimated_distance_meters
+        tests:
+          - not_null

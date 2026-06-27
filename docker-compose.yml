@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgis/postgis:15-3.4
+    container_name: seattle_rental_db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-seattle_rental}
+      POSTGRES_USER: ${POSTGRES_USER:-rental_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change_me_in_production}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-rental_user}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:

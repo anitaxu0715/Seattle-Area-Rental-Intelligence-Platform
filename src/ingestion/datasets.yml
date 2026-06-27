@@ -1,0 +1,62 @@
+# Seattle Open Data Dataset Configuration
+# Each entry configures a Socrata API dataset for ingestion.
+# Field names verified against live Socrata API metadata.
+
+datasets:
+  building_permits:
+    name: "Building Permits - Current"
+    source: "City of Seattle Open Data"
+    description: "Building permits issued by the City of Seattle"
+    purpose: "Identify nearby construction and development activity near candidate apartments"
+    domain: "data.seattle.gov"
+    dataset_id: "76t5-zqzr"
+    raw_table: "raw_building_permits"
+    natural_key: "permitnum"
+    default_limit: 1000
+    page_size: 1000
+    date_filter_field: "issueddate"
+    lookback_days: 365
+    order: "issueddate DESC"
+    enabled: true
+
+  rental_property_registration:
+    name: "Rental Property Registration"
+    source: "City of Seattle Open Data"
+    description: "Registered rental properties in the City of Seattle"
+    purpose: "Check whether candidate apartments can be matched to rental registration records"
+    domain: "data.seattle.gov"
+    dataset_id: "j2xh-c7vt"
+    raw_table: "raw_rental_registration"
+    natural_key: "permitnum"
+    default_limit: 1000
+    page_size: 1000
+    order: "registereddate DESC"
+    enabled: true
+
+  code_complaints_violations:
+    name: "Code Violations"
+    source: "City of Seattle Open Data"
+    description: "Code enforcement complaints and violations in Seattle"
+    purpose: "Identify complaint or violation signals near candidate apartments"
+    domain: "data.seattle.gov"
+    dataset_id: "ez4a-iug7"
+    raw_table: "raw_code_violations"
+    natural_key: "recordnum"
+    default_limit: 1000
+    page_size: 1000
+    date_filter_field: "opendate"
+    lookback_days: 730
+    order: "opendate DESC"
+    enabled: true
+
+  neighborhood_boundaries:
+    name: "Neighborhood Map Atlas Neighborhoods"
+    source: "Seattle GeoData"
+    description: "Neighborhood boundary polygons for Seattle"
+    purpose: "Support neighborhood-level aggregation and geospatial joins"
+    domain: "data-seattlecitygis.opendata.arcgis.com"
+    dataset_id: "neighborhood-map-atlas-neighborhoods"
+    format: "geojson"
+    raw_table: "raw_neighborhoods"
+    enabled: false
+    notes: "GeoJSON format - requires different ingestion logic than Socrata datasets"

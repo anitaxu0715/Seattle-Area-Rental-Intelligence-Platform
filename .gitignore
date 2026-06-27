@@ -1,0 +1,31 @@
+# Environment
+.env
+__pycache__/
+*.pyc
+
+# Local/private candidate data (never commit real apartment search notes)
+data/seed/candidate_apartments.local.csv
+data/seed/personal_preferences.yml
+
+# Raw extracted data
+data/raw/*.json
+
+# dbt
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+dbt/.user.yml
+
+# Python
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,40 @@
+with source as (
+    select * from {{ source('raw', 'raw_candidate_apartments') }}
+)
+
+select
+    apartment_id,
+    apartment_name,
+    upper(trim(address))                as normalized_address,
+    address                             as original_address,
+    city,
+    state,
+    zip_code,
+    neighborhood,
+    listed_rent,
+    listed_rent_min,
+    listed_rent_max,
+    rent_basis,
+    rent_notes,
+    unit_type,
+    square_feet,
+    year_built,
+    parking_available,
+    parking_fee,
+    pet_policy,
+    online_availability_status,
+    actual_availability_status,
+    tour_date,
+    management_notes,
+    personal_notes,
+    latitude,
+    longitude,
+    location_source,
+    location_confidence,
+    data_privacy_level,
+    notes_public_safe,
+    consideration_status,
+    exclusion_reason,
+    include_in_final_comparison,
+    loaded_at
+from source
